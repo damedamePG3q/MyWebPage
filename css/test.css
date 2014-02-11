@@ -1,0 +1,4 @@
+@font-face {
+    font-family: smileBasic;			/* フォントにフォント集合名を付ける */
+    src: url(../css/webfont/petc/PETC.ttf) format('truetype');	/* フォントのURLを指定する */
+}

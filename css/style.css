@@ -1,0 +1,181 @@
+﻿/* 共通スタイル */
+
+*{margin:0;padding:0;}
+
+body{
+	background-image:url("../img/design/wood05.gif");
+}
+
+/* Block */
+.head{
+	background-image:url("../img/design/wood03.gif");
+	color:white;
+}
+.menu{
+	float:left;
+}
+
+.body{
+	float:left;
+	overflow:auto;
+	background-image:url("../img/design/turf006.jpg");
+}
+.foot{
+	clear:both;
+}
+
+/* Menu */
+li.menuItem a{
+	text-decoration: none;
+	display:block;
+	color:#eee;
+	font-weight:bold;
+	background-image:url("../img/design/wood01.gif");
+	font-family:'Lucida Grande','Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',Meiryo, メイリオ, sans-serif;
+}
+
+li.menuItem a:hover{
+	color:yellow;
+}
+li.menuItem{
+	border-style:solid;
+	border-color:black;
+}
+
+/* Contents */
+
+.contents{
+	background-color:#eee;
+}
+
+h1{
+	border-top-style:ridge;
+	border-bottom-style:ridge;
+	border-left-style:ridge;
+	border-color:#8b4513;
+	background-color:#cd853f;
+	color:#fff;
+	background-image:url("../img/design/wood01.gif");	
+}
+h2{
+	border-top-style:double;
+	border-bottom-style:double;
+}
+h3{
+	font-weight:bold;
+	border-bottom-style:solid;
+	border-color:black;
+}
+
+div.newTitle{
+	color:steelblue;
+}
+div.newList{
+	overflow-y:scroll;
+	border-style:solid;
+	border-width:1px;
+}
+
+div.pageTable div.colH{
+	background-image:url("../img/design/wood01.gif");
+	border-style:solid;
+	border-color:black;
+}
+div.pageTable div.col2{
+	border-style:solid;
+	border-color:black;
+}
+div.pageTable div.colH a:hover{
+	color:yellow;;
+}
+div.pageTable div.colH a{
+	color:#eee;
+	text-decoration: none;
+	font-weight:bold;
+}
+
+div.profileTable div.colH,
+div.profileTable div.col2{
+	border-style:solid;
+	border-color:black;
+}
+
+/* アプリ一覧 */
+div.appTable{
+	/*border-style:solid;*/
+}
+div.appTable div.colH{
+	border-style:solid;
+}
+div.appTable div.detail{
+	border-style:solid;
+}
+div.appTable div.link{
+	border-style:solid;
+}
+
+div.prevPage{text-align:left;}
+div.nextPage{text-align:right;}
+
+
+/* QRポップアップ用 */
+.qrBox{float:left;}
+.petit_qrCode{width:256;}
+
+/* プログラムリスト ポップアップ用 */
+div.pgListArea{background-color:green;}
+div.pgListArea ol{list-style-type: decimal-leading-zero;}
+div.pgListArea li{color:white;}
+
+/* */
+
+div.adPict{float:left;width:120px;};
+
+/* font */
+.fontNote{color:red;}
+.fontRemaks{color:green;}
+.fontCaution{color:red;}
+.fontImportant{color:blue;}
+.fontPickup{color:deeppink;}
+
+.fontLifeList{font-size:0.8em;}
+.fontPickUp2{color:royalblue;}
+.fontLifeNote{font-size:0.8em;color:darkgreen;}
+
+.fontBig{font-size:1.2em;}
+.fontXBig{font-size:2em;}
+.fontSmall{font-size:0.8em;}
+.fontStrong{font-weight:bold;}
+.fontSenryu{font-family:curslve;font-size:1.4em;font-weight:bold;}
+
+a.mailto:link,
+a.mailto:visited{color:blue;}
+a.mailto:hover{color:red;}
+div.topLink a:link,
+div.topLink a:visited,
+div.nextPage a:link,
+div.nextPage a:visited,
+a.gameLink:link,
+a.gameLink:visited,
+a.textLink:link,
+a.textLink:visited{color:blue;}
+div.topLink a:hover,
+div.nextPage a:hover,
+a.gameLink:hover,
+a.textLink:hover{color:red;}
+
+
+div.code{
+	background-color:#ddd;
+	font-family:"Osaka−等幅","ＭＳ ゴシック","monospace"; 
+	font-size:0.8em;
+	border-style:solid;
+	border-width:1px;
+}
+ol.codeList{
+	margin-left:50px;
+}
+div.code .comment{color:green;}
+div.code .keyword{color:blue;}
+div.code .leteral{color:orange;}
+div.code .label{color:purple}

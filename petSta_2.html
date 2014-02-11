@@ -1,0 +1,130 @@
+﻿<html>
+<head>
+<title>努力と時間の無駄遣い～くだらないことほど本気になる～</title>
+<meta name="description" content="プチコンによる自作ゲームなどの個人サイト">
+<meta name="keywords" content="プチコン,QR,QRコード,三角関数,サイン,コサイン,タンジェント,角度,計算,学習,初心者,講座,ゲームの作り方,PetitComputer,game,qrcode">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/pageCommonInc.js"></script>
+<script type="text/javascript" src="js/lib.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/pageInit.js"></script>
+</head>
+<body>
+<div class="head" id="head"><script type="text/javascript" src="js/head.js"></script></div>
+<div class="body" id="body">
+<div class="contents">
+<!--本文 START-->
+<h1>プチコン講座</h1><br>
+
+<h2>初心者の方へ</h2>
+<p>
+プチコンやプログラムに関して、全く知らない初心者の方は<br>公式サイトのプチコン初心者講座が一番丁寧でわかりやすいです。<br>
+<a href="http://smileboom.com/special/ptcm2/co_konnichiwa/p01.php" class="textLink" target="_blank">プチコンmkII 初心者講座</a><br>
+<br>
+また、ここではゲームプログラムを作成するにあたっての、<br>基礎的な知識を、<b class="fontPickup">極力難しいことを考えずに</b>伝えたいと考えております。
+</p>
+
+<div class="pageList lv2">
+<b>目次</b>
+<ol>
+<li><a href="petSta_1.html" class="textLink">ジャンプの動作</a></li>
+<li><b>角度計算の基本</b></li>
+<li><a href="petSta_3.html" class="textLink">音楽(ＭＭＬ)の基本</a></li>
+</ol>
+</div>
+
+<h2>角度計算の基本</h2>
+<div class="lv2">
+<div class="table">
+	<div class="row">
+		<div class="cell">
+			<span style="color:red;font-size:4em;">×</span><br>
+			<img src="img/ptSta/bundoki.jpg" class="graph">
+		</div>
+		<div class="cell">
+			<span style="color:blue;font-size:4em;">○</span><br>
+			<img src="img/ptSta/radian.jpg" class="graph">
+		</div>
+	</div>
+</div>
+<p>
+コンピュータにでは一般的な180度の分度器という概念はありません。<br>
+1周を360とする考え方は、コンピュータには理解し難いからです。<br>
+なので、円の中心角とそれに対する弧の長さは比例する。<br>
+ということを利用した<b>ラジアン</b>という単位が使用されます。<br>
+ここでは難しいことにはあまり触れませんが、<br>
+使い方が分かればとそれほど複雑でもありません。<br>
+</p>
+<p>
+<b>ラジアン</b><br>
+180°＝π<br>
+180°＝3.141592<br>
+<br>
+また、ラジアンと角度(360°法)は、<b>関数で簡単に変換</b>できます。<br>(RAD,DEG関数)<br>
+</p>
+では、このラジアンは実際にどこで使うかというと
+<img src="img/ptSta/drawRadian.jpg" class="graphBig"><br>
+コンピュータの画面では、原点が左上になるのがポイントになります。<br>
+<br>
+実際に好きな場所に直線を描画する際には、<b>座標</b>が必要になります。<br>
+<img src="img/ptSta/drawLine.jpg" class="graphBig"><br>
+そこで<b>三角関数</b>の「サイン：<b>SIN</b>」と「コサイン：<b>COS</b>」が必要になります。<br>
+使い方は<br>
+<b class="fontImportant">X座標を求めるにはコサイン(COS)</b><br>
+<b class="fontImportant">Y座標を求めるにはサイン(SIN)</b><br>
+と暗記しても良いでしょう。<br>
+わかりにくければ実際に簡単なサンプルを動かしてみればわかります。<br>
+<b class="fontPickup">～勉強するより動かして慣れろ～</b><br>
+<br>
+<br>
+逆に座標から角度を知るには、<b>アークタンジェント</b>を使用します。<br>
+<img src="img/ptSta/atan2.jpg" class="graphBig"><br>
+アークタンジェントには、ATANとATAN2があるので注意。<br>
+ATAN2を使用すると、シューティングゲームとかで自分に真っ直ぐ向かってくる玉を実現できます。<br>
+<br>
+<br>
+長さを知るには、<b>三平方の定理</b>を使用すると知ることができます。<br>
+<img src="img/ptSta/pita.jpg" class="graphBig"><br>
+また、角度から高さを知るには、タンジェントを使えば知ることができます。<br>	
+<p>
+一応サンプルプログラム置いておきます、丁寧に１行１コメントになっておりますので、ファイルサイズが若干大きいです。<br>
+<a href="#" onclick="window.open('qr_pop_up.html?p='+encodeURI('三角関数のサンプルゲーム')+',sp_stg01,1',null,'width=640,height=480,location=no');return false;">QRコード</a>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<a href="#" onclick="window.open('img_pop_up.html?p='+encodeURI('三角関数のサンプルゲーム')+',ptSta/stg_list.jpg,pgListImg',null,'width=640,height=480,location=no');return false;">プログラムリスト</a>
+</p>
+</div>
+
+<div class="nextPage"><a href="petSta_3.html">次のページ&nbsp;&nbsp;－音楽(ＭＭＬ)の基本ー</a></div>
+
+<br>
+<div class="box">
+	<div class="adPict">
+		<a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?vs=3097971&vp=882323206&vg=6000296439&va=2599687&vc_url=http%3A%2F%2Fwww.7netshopping.jp%2Fbooks%2Fdetail%2F-%2Faccd%2F1102474492%2Fsubno%2F1" target="_blank" ><img src="http://img.7netshopping.jp/bks/images/i2/31959481.JPG" width="100" height="100" border="0"><img src="http://ad.jp.ap.valuecommerce.com/servlet/productlink?vs=3097971&vg=6000296439&va=2599687&vp=882323206" height="1" width="1" border="0"></a><br>
+	</div>
+	<div class="adDetail">
+		<a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?vs=3097971&vp=882323206&vg=6000296439&va=2599687&vc_url=http%3A%2F%2Fwww.7netshopping.jp%2Fbooks%2Fdetail%2F-%2Faccd%2F1102474492%2Fsubno%2F1" target="_blank" ><img src="http://ad.jp.ap.valuecommerce.com/servlet/productlink?vs=3097971&vg=6000296439&va=2599687&vp=882323206" height="1" width="1" border="0">計算しない数学、計算する数学　ホントの数学は自分の中にある　数学バトル</a><br>
+	</div>
+	<p class="fontSmall">
+		数学＝計算ではない！原理や構造の理解を大切にすると、数学はもっとおもしろくなる！数学は永遠性を秘めている。数学だけが人間の唯一の証ではないかという感動が湧いてくる—。<br>
+	</div>
+<br>
+
+<!-- 広告表示 -->
+<script type="text/javascript" src="js/adType4.js"></script><br>
+
+<div class="topLink"><a href="index.html">トップに戻る</a></div>
+<!--本文 END-->
+</div>
+
+
+</div>
+
+<div class="menu" id="menu"><script type="text/javascript" src="js/menu.js"></script></div>
+
+<!-- 広告表示 -->
+<script type="text/javascript" src="js/adTypeH2.js"></script><br>
+
+<div class="foot" id="foot"><script type="text/javascript" src="js/foot.js"></script></div>
+</body>
+</html>

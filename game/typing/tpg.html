@@ -1,0 +1,581 @@
+<HTML>
+<HEAD>
+<TITLE>PG TYPING</TITLE>
+<link href="tpg.css" rel="stylesheet" type="text/css">
+<SCRIPT type="text/javascript" src="Ajax.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="Common.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="sub.js"></SCRIPT>
+<SCRIPT type="text/javascript">
+<!--
+	var d=document;	
+	window.onload=init;
+
+	//HTML DOMオブジェクト
+	var objPageMain;		//ページ全体DIV(HTMLオブジェクトはこの中に入れる)スタイル維持のため
+
+	//個別パーツ
+	var objDisp1;			//出題/カウントダウン
+	var objDisp2;			//入力
+	var objDisp3;			//コメント
+	var objSubTime;			//制限時間サブ
+
+	var objStartBtn;		//スタートボタン
+	var objTime;			//時間表示
+	var objGroup;			//問題の種類選択
+	var objInType;			//入力方式選択
+	var objScore;			//
+	
+	var objCombo;			//コンボ数表示
+
+	//パーツ格納箱
+	var objCtlBox;			//操作系
+	var objTimeBox;			//時間表示
+	var objScrBox;			//得点表示
+	var objMainBox;			//出題表示
+	var objTitleBox;		//タイトル画面
+
+	//制御変数
+	var myAjax;				//Ajaxオブジェクト
+	var csv;				//出題全体データCSV(Ajaxにて取得)
+	var dataList;			//出題データ配列[][]
+	var qList;				//出題順番配列[]
+	var qCnt=0;				//出題カウンタ
+	var charType;			//0:英語　1:日本語
+
+	var question;			//出題データ１問
+	var ansPos;				//現在回答位置
+	var gameFlg=0;			//入力無効化制御用
+	var startTime;			//タイマー用
+
+	var subCnt;				//加点タイマーカウンタ
+	var bonusFlg;			//加点フラグ
+	var comboFlg;			//Trueの時コンボ有効
+
+	var score=0;			//得点
+	var combo=0;			//コンボ数
+	var maxcombo=0;			//最大コンボ数
+
+	var typeCntA=0;			//入力文字数
+	var typeCntL=0;			//入力文字数
+	var missCntA=0;			//間違数
+	var missCntL=0;			//間違数
+
+	//設定
+	var timeLimit=60;		//制限時間(秒)
+
+	/***************
+	初期処理
+	***************/
+	function init(){
+		myAjax=new Ajax();	
+		makeDisp();
+		addEvent();
+		getAjaxGropMst();	//サーバよりプルダウンのデータ取得
+	}
+
+	/*******************
+	HTMLオブジェクト配置
+	********************/
+	function makeDisp(){
+		var body;
+		var txtNode;
+		var br;
+		var opt;
+
+		body=d.getElementsByTagName("BODY")[0];
+
+		//MainPage(スタイル調整用)
+		objPageMain=d.createElement("DIV");
+		objPageMain.className="PAGE";
+		body.appendChild(objPageMain);
+
+		//得点表示
+		objScrBox=d.createElement("DIV");		//ボックス
+		objScrBox.className="SCR_BOX";
+		objPageMain.appendChild(objScrBox);
+		
+		txtNode=d.createTextNode("SCORE: ");	//ラベル
+		objScrBox.appendChild(txtNode);
+		objScore=d.createElement("SPAN");
+		objScore.className="SCORE";
+		objScore.innerHTML="0";
+		objScrBox.appendChild(objScore);
+		br=d.createElement("BR");body.appendChild(br);
+
+		//時間表示
+		objTimeBox=d.createElement("DIV");		//ボックス
+		objTimeBox.className="TIME_BOX";
+		objTimeBox.style.visibility="hidden";
+		objPageMain.appendChild(objTimeBox);
+
+		txtNode=d.createTextNode("TIME: ");		//ラベル
+		objTimeBox.appendChild(txtNode);
+		objTime=d.createElement("SPAN");		//本体
+		objTime.className="TIME";
+		objTime.innerHTML="";
+		objTimeBox.appendChild(objTime);
+
+		//出題表示(メイン)
+		objMainBox=d.createElement("DIV");			//ボックス
+		objMainBox.className="NULL";
+		objPageMain.appendChild(objMainBox);
+
+		objDisp1=d.createElement("DIV");
+		objDisp1.className="QUESTION";
+		objDisp1.innerHTML="";
+		objMainBox.appendChild(objDisp1);
+		
+		objDisp2=d.createElement("DIV");			//入力表示
+		objDisp2.className="DISP";
+		objDisp2.innerHTML="";
+		objMainBox.appendChild(objDisp2);
+
+		objDisp3=d.createElement("DIV");				//コメント
+		objDisp3.className="COMMENT";
+		objDisp3.innerHTML="";
+		objMainBox.appendChild(objDisp3);
+		
+		objSubTime=d.createElement("DIV");			//制限時間サブ
+		objSubTime.className="SUB_TIME";
+		objSubTime.innerHTML="";
+		objMainBox.appendChild(objSubTime);
+		
+		objTitleBox=d.createElement("DIV");
+		objTitleBox.className="TITLE";
+		objTitleBox.innerHTML="TYPING PRACTICE<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ver. 1.0<BR>";
+		objPageMain.appendChild(objTitleBox);
+		
+		br=d.createElement("BR");
+		objPageMain.appendChild(br);
+
+		//コントロール
+		objCtlBox=d.createElement("DIV");				//ボックス
+		objCtlBox.className="CONTROL_BOX";
+		objCtlBox.visibility="hidden";
+		objPageMain.appendChild(objCtlBox);
+
+		//問題選択プルダウン
+		txtNode=d.createTextNode("出題タイプ: ");	//ラベル
+		objCtlBox.appendChild(txtNode);
+		objGroup=d.createElement("SELECT");
+		objCtlBox.appendChild(objGroup);
+		txtNode=d.createTextNode("　");
+		objCtlBox.appendChild(txtNode);
+		
+		//入力選択プルダウン(ローマ／ヘボン)
+		txtNode=d.createTextNode("入力方式: ");	//ラベル
+		objCtlBox.appendChild(txtNode);
+
+		objInType=d.createElement("SELECT");
+		opt=d.createElement("OPTION");
+		opt.value=0;
+		opt.innerHTML="ローマ式";
+		objInType.appendChild(opt);
+		
+		opt=d.createElement("OPTION");
+		opt.value=1;
+		opt.innerHTML="ヘボン式";
+		objInType.appendChild(opt);
+		objCtlBox.appendChild(objInType);
+		txtNode=d.createTextNode("　　　");
+		objCtlBox.appendChild(txtNode);
+
+		//StartButton
+		objStartBtn=d.createElement("INPUT");
+		objStartBtn.type="button";
+		objStartBtn.className="BUTTON";
+		objStartBtn.value="START";
+		objStartBtn.className="STARTBUTTON";
+		objCtlBox.appendChild(objStartBtn);
+
+		objCombo=d.createElement("DIV");
+		objCombo.className="COMBO";
+		objCombo.innerHTML="1 COMBO!";
+		objCombo.style.visibility="hidden";
+		objPageMain.appendChild(objCombo);
+		
+
+	}
+
+	/****************
+	イベント追加
+	****************/
+	function addEvent(){
+		if(d.all){
+			d.onkeypress=checkKey;	
+			objStartBtn.onclick=start;
+		}else{
+			d.onkeypress=checkKey;
+			objStartBtn.onclick=start;
+		}
+	}
+
+	/**************
+	ボタンイベント
+	****************/
+	function start(){
+		objCtlBox.style.visibility="hidden";
+		objMainBox.className="MAIN_BOX";
+		objTitleBox.style.display="none";
+		objDisp2.innerHTML="";
+		getAjaxData();	//サーバーより全体出題データの取得→initGame();
+	}
+
+	/***************
+	初期設定
+	****************/
+	function initGame(){
+		ansPos=0;	
+		startTime=new Date();
+		dataList=csvToArray(csv);
+		qList=makeRndList(dataList.length);
+		
+		//カウントダウン開始
+		objDisp1.className="COUNT_DOWN";
+		startCount();							
+
+		score=0;
+		typeCntA=0;
+		typeCntL=0;
+		missCntA=0;
+		missCntL=0;
+		combo=0;
+		comboFlg=true;
+		maxcombo=0;
+	}
+
+	/********************************
+	スタートタイマー(カウントダウン)
+	*********************************/
+	function startCount(){
+		var endTime;
+		var time;
+		var timeCount=3;
+		var wk;
+
+		endTime = new Date();
+		time=endTime.getTime()-startTime.getTime();	
+
+		wk=timeCount - Math.floor(time/1000);
+		objDisp1.innerHTML="<  "+ wk +"  >";		
+		
+		if(time<(timeCount)*1000){
+			setTimeout(startCount,10);
+		}else{
+			//ゲーム開始
+			startTime=new Date();		//タイマー起動
+			setTimeout(timer,100);					
+			objTimeBox.style.visibility="visible";
+			objDisp1.className="QUESTION";
+			gameFlg=1;
+			bonusFlg=false;
+			next();						//出題表示
+			subTimer();
+		}
+	}
+
+	/******************
+	タイマー(プレイ中)
+	*******************/
+	function timer(){
+		var endTime;
+		var time,wk;
+
+		//経過時間
+		var tS,tMS,ms;
+		
+		//逆算表示用
+		var dS,dMS=0;
+		
+		dS=timeLimit-1;
+		dMS=1000;
+		
+		endTime=new Date();
+		time=endTime.getTime()-startTime.getTime();		//経過ミリ秒取得
+		ms=time;		
+
+		tS=Math.floor(time/1000);						//'秒'を取得
+		time=time-(tS*1000);
+		tMS=time;
+
+		//通常表示
+		//objTime.innerHTML=tH+"時間"+tM+"分"+tS+"秒"+tMS;
+
+		//逆算表示
+		wk=dMS-tMS;
+		if(wk==1000){wk=0;}
+		objTime.innerHTML=dS-tS+"秒"+wk;		
+
+		//setTimeout(timer,10);return;
+		if(ms<dS*1000){
+			setTimeout(timer,100);
+		}else{
+			end();
+		}
+	}
+	
+	/***************
+	加点タイマー
+	****************/
+	function subTimer(){
+		var i;
+		var s="";
+		if(gameFlg==0){return;}
+		for(i=0;i<subCnt;i++){s+="*";}
+		s+="　";
+		objSubTime.innerHTML=s;
+		
+		
+		if(combo<5){
+			objCombo.style.visibility="hidden";	
+		}else{
+			objCombo.style.visibility="visible";	
+		}
+		objCombo.innerHTML=combo+"  COMBO!";
+		
+		if(combo>20&&subCnt%2==0){objCombo.style.visibility="hidden";}
+
+		
+		if(subCnt>0){subCnt--;}else{bonusFlg=false;comboFlg=false;combo=0;}
+		setTimeout(subTimer,100);
+	}
+
+	/***************
+	次の出題
+	****************/
+	function next(){
+		var wk;
+		var cType;
+		
+		question=dataList[qList[qCnt]][1];				//出題テキスト
+		objDisp1.innerHTML=dataList[qList[qCnt]][0];	//出題メイン表示部
+		objDisp3.innerHTML=dataList[qList[qCnt]][3];	//知識コメント部
+		cType=dataList[qList[qCnt]][2];					//出題タイプ(英語:0 or 日本語:1)
+
+		//日本語問題の場合
+		if(cType==1){
+			if(objInType.value=="0"){
+				question=convTypeRome(question);
+			}else{
+				question=convTypeHepburn(question);
+			}
+		}
+		qCnt++;
+		if(qCnt>=qList.length){qCnt=0;}
+		ansPos=0;
+		
+		//得点計算
+		wk=typeCntL - missCntL;
+		if(bonusFlg==true){wk+=5;}
+		if(wk<0)wk=0;
+		score+=wk;
+		typeCntL=0;
+		missCntL=0;
+		update();
+		subCnt=20;
+		bonusFlg=true;
+		comboFlg=true;
+	}
+	
+	/***************
+	終了
+	****************/
+	function end(){
+		var s;
+		var wk;
+
+		gameFlg=0;
+		bonusFlg=false
+		next();
+
+		objCombo.style.visibility="hidden";
+		score+=maxcombo;
+
+		wk=typeCntA-(missCntA*4);
+
+		if(wk>0){
+			wk/=timeLimit;
+			wk*=100;
+			wk=Math.round(wk);
+			wk/=100;
+		}else{wk=0;}
+		
+
+		
+		//結果情報
+		s="総入力数："+typeCntA+"<BR>ミスタイプ数："+missCntA+"<BR>";
+		s+="最大コンボ数："+maxcombo+"<BR>";
+		s+="タイピング速度 秒間"+wk+"キー";
+
+		objDisp1.innerHTML="";
+		objDisp2.innerHTML=s;
+		objDisp3.innerHTML="";
+		objSubTime.innerHTML="";
+		objCtlBox.style.visibility="visible";
+		objTimeBox.style.visibility="hidden";
+	}
+
+	/**************
+	キーボード判定
+	***************/
+	function checkKey(e){
+		var keyCode;
+		var rt;
+		var wk;
+		
+		if(gameFlg==0)return;
+		if(d.all){
+			keyCode=event.keyCode;
+		}else{
+			if(e.keyCode){
+				keyCode=e.keyCode;
+			}else{
+				keyCode=e.charCode;
+			}
+			if(e!=null){
+				// イベントの上位伝播を防止 
+				e.preventDefault(); 
+				e.stopPropagation(); 
+			}
+		}
+
+		if(keyCode!=0){
+			rt=judge(String.fromCharCode(keyCode));	//正誤判定
+			if(rt==0){			//HIT
+				typeCntA++;
+				typeCntL++;
+				if(comboFlg){combo++;if(maxcombo<combo){maxcombo=combo;}}
+				update();		
+			}else if(rt==1){	//FIN
+				next();
+			}else{				//BAD
+				missCntA++;
+				missCntL++;
+				combo=0;
+				comboFlg=false;
+				missOn();
+			}
+		}
+		return;
+	}
+
+	/**************
+	画面更新
+	***************/
+	function update(){
+		var elm;		var i,l;
+		var newStr="";
+		var oldStr=""; 
+		
+		for(i=0;i<ansPos;i++){oldStr+=question.charAt(i);}
+		l=question.length;
+		for(;i<l;i++){newStr+=question.charAt(i);}
+
+		objDisp2.innerHTML="";
+		elm=d.createElement("SPAN");
+		elm.className="OLD_QUESTION";
+		elm.innerHTML=oldStr;
+		objDisp2.appendChild(elm);
+		elm=d.createElement("SPAN");
+		elm.className="NEW_QUESTION";
+		elm.innerHTML=newStr;
+		objDisp2.appendChild(elm);
+		
+		objScore.innerHTML=score;
+		
+	}
+	/**************
+	正誤判定
+	***************/
+	function judge(input){
+		var rt;
+		if(question.charAt(ansPos)==input){
+			ansPos++;
+			rt=0
+		}else{
+			rt=-1;
+		}
+		if(question.length<=ansPos){
+			rt=1;
+		}
+		return rt;
+	}
+
+	function missOn(){
+		objPageMain.className="MISS";
+		setTimeout(missOff,100);
+	}
+	function missOff(){
+		objPageMain.className="PAGE"
+		
+	}
+
+
+	/****************************
+	出題データ取得(スターター）
+	*****************************/
+	function getAjaxData(){
+		var param;
+		var file="";						//スタンドアロン用
+		var url="getData.php";				//サーバ処理用
+		
+		file="data"+objGroup.value+".dat";	//スタンドアロン用
+		param="?g="+objGroup.value;			//サーバ処理用
+		url=url+param;
+
+		myAjax.get("GET",file,null,true);
+		//myAjax.get("GET",url,null,true);	//サーバ処理用
+		
+		setTimeout(waitLoop,10);
+	}
+
+	/****************************
+	出題データ取得(待機ループ）
+	*****************************/
+	function waitLoop(){
+		if(myAjax.getStatus()==2){
+			csv=myAjax.getData();
+			initGame();
+		}else{		
+			setTimeout(waitLoop,10);
+		}
+	}
+
+	/*****************************
+	グループデータ取得(スターター)	
+	*****************************/
+	function getAjaxGropMst(){
+		//myAjax.get("GET","getGroupData.php",null,true);	//サーバ処理用
+		myAjax.get("GET","group.dat",null,true);			//スタンドアロン用
+		setTimeout(waitLoopGropMst,300);
+	}
+	
+	/*****************************
+	グループデータ取得(待機ループ)	
+	*****************************/
+	function waitLoopGropMst(){
+		var opt;
+		var list;
+		var i,l;
+		if(myAjax.getStatus()==2){
+			list=csvToArray(myAjax.getData());
+			l=list.length;
+			//Dom
+			objGroup.innerHTML="";
+			for(i=0;i<l;i++){
+				opt=d.createElement("OPTION");
+				opt.value=list[i][0];
+				opt.innerHTML=list[i][1];
+				objGroup.appendChild(opt);
+			}
+			objCtlBox.visibility="visible";
+		}else{		
+			setTimeout(waitLoopGropMst,10);
+		}
+	}
+
+//-->
+</SCRIPT>
+</HEAD>
+<BODY><NOSCRIPT>このページはJavaScriptが有効でないと表示できません。</NOSCRIPT></BODY>
+</HTML>

@@ -1,0 +1,94 @@
+/* ページ全体 */
+.PAGE{width:640;
+	border-style:solid;
+	padding:10px;
+	border-width:3px;
+	border-color:black;
+	background-color:black;
+	color:white;
+}
+.MISS{
+	border-style:solid;
+	padding:10px;
+	border-width:3px;
+	border-color:black;
+	background-color:red;
+	color:white;
+}
+
+
+
+INPUT,SELECT{
+	background-color:blue;
+	border-color:red;
+	color:yellow;
+}
+
+/* メイン表示 */
+.MAIN_BOX{
+	border-style:groove;
+	border-width:5px;
+	background-color:#cc6600;
+	
+}
+DIV,SPAN{border-width:0px;}
+.QUESTION{
+	color:#000;
+	margin-left:30px;
+	font-size:40px;
+	font-weight:bold;
+}
+.DISP{
+	margin-left:40px;
+	font-size:30px;
+}
+.OLD_QUESTION{color:blue;}
+.NEW_QUESTION{color:white;}
+.COUNT_DOWN{
+	padding-top:20px;
+	text-align: center;
+	font-size:30px;
+	font-weight:bold;
+}
+.COMMENT{
+	color:#003300;
+	font-size:24px;
+	margin-left:60px;
+}
+
+.SUB_TIME{
+	margin-left:30px;
+}
+
+/* スコア */
+.SCR_BOX{
+	/*background-color:red;*/
+	text-align: right;
+	heigth:2em;
+}
+
+/* タイム */
+.TIME_BOX{
+	/*background-color:red;*/
+}
+
+/* タイトル画面 */
+.TITLE{
+	font-size:24;
+	font-weight:bold;
+	padding:10px;
+	background-color:#000;	
+	color:#fff;
+}
+
+.COMBO{
+	font-size:24;
+	position:absolute;
+	top:130px;	
+	left:400px;		
+}
+
+/* デバッグ用 */
+/*
+DIV,SPAN{border-style:solid;border-width:1px;border-color:yellow;}
+*/

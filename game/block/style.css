@@ -1,0 +1,67 @@
+*{
+	margin:0;
+	padding:0;
+	font-size:8pt;
+}
+
+/* MainTable */
+
+.TETRIS_NEXT_BOX{
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+}
+.TETRIS_NEXT_BOX TR TD{
+	width:8px;
+	height:8px;
+}
+
+.TETRIS_MAIN_BOX TR TD{
+	width:16px;
+	height:16px;
+}
+
+.TETRIS_MAIN_BOX{
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+}
+
+
+.TETRIS_BLOCK_0{
+	color:red;
+	background-color:red;
+}
+.TETRIS_BLOCK_1{
+	color:blue;
+	background-color:blue;
+}
+.TETRIS_BLOCK_2{
+	color:pink;
+	background-color:pink;
+}
+.TETRIS_BLOCK_3{
+	color:green;
+	background-color:green;
+}
+.TETRIS_BLOCK_4{
+	color;gray;
+	background-color:gray;
+}
+.TETRIS_BLOCK_5{
+	color:purple;
+	background-color:purple;
+}
+.TETRIS_BLOCK_6{
+	color:orange;
+	background-color:orange;
+}
+.TETRIS_BLOCK_7{
+	color:black;
+	background-color:black;
+}
+
+.TETRIS_BLOCK_NONE{
+	width:16px;
+}
+

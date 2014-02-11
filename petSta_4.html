@@ -1,0 +1,65 @@
+﻿<html>
+<head>
+<title>努力と時間の無駄遣い～くだらないことほど本気になる～</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/pageCommonInc.js"></script>
+<script type="text/javascript" src="js/lib.js"></script>
+<script type="text/javascript" src="js/common.js">
+</head>
+<body>
+<div class="head" id="head"><script type="text/javascript" src="js/head.js"></script></div>
+<div class="menu" id="menu"><script type="text/javascript" src="js/menu.js"></script></div>
+<div class="body" id="body">
+<div class="contents">
+<!--本文 START-->
+<h1>プチコン講座</h1><br>
+
+<h2>初心者の方へ</h2>
+<p>
+プチコンやプログラムに関して、初心者の方は公式サイトのプチコン初心者講座が一番丁寧でわかりやすいです。
+<a href="http://smileboom.com/special/ptcm2/co_konnichiwa/p01.php" target="_blank">プチコンmkII 初心者講座</a>
+</p>
+
+<h2>ＭＭＬの基礎</h2>
+<div class="lv2">
+<p>
+プチコンではMMLによって、音楽を打ち込むことができます。<br>
+はじめはわかりにくいですが、実際に使ってみると案外単純なことがわかると思います。<br>
+<img src="img/ptSta/tyu_music.png" class="graphBig"><br>
+要するに、音楽の楽譜をアルファベットで表現したものになっています。<br>
+アルファベットで音階、休符はR(ギターのコードを知っていると馴染みやすいかも)、<br>
+数字で長さ、2なら二分音符、8なら八分音符。省略した場合は４分音符。<br>
+意外と単純であることがわかると思います。<br>
+※　省略時の音符の長さは最初に設定することもできます。<br>
+<br>
+また、MMLでは音楽の楽譜同様の繰り返しを行うことができます。[ と ]<br>
+<br>
+実際にプチコンに打ち込む場合はこのようになります。
+<img src="img/ptSta/mml.png" class="graphBig"><br>
+プチコンの場合MMLはデータ文で定義するのが一般的になっています。<br>
+冒頭の部分で曲全体にかかわるテンポなどを設定し、バンドスコアのパートに当たる部分をチャンネルとして、打ち込んでいきます。<br>
+チャンネルでは、チャンネル番号、使う楽器の種類を設定してから、実際のメロディ譜に当たる部分を書いていきます。<br>
+<br>
+実行する際は、データ文からBGMに設定して、その後再生します。<br>
+</p>
+</div>
+
+<h2>昔風のレースゲームの道路</h2>
+
+昔風のレースゲームは、このようにして道路の曲線を表現しているものがありました。
+ファミコンなどでは、ディスプレイに出力する際に、上から1行づつ描画していたので、描画時に座標をずらすことができました。
+これをラスタースクロールといいます。<br>
+<img src="img/ptSta/luster.png" class="graphBig"><br>
+プチコンでは、そのような機能がないため、グラフィック領域に１行づつずらしながら描画することによって、一応実現できますが、
+プチコンではグラフィック処理が低速なため、書き込む回数が多いと確実に処理落ちしますので、あまり細かくずらして表示することは現実的ではありません。
+自分はゲーム全体の速度を遅くして、1px単位で描画することによって綺麗な画面を出していますが、フレームレートは非常に低いのが現状です。
+
+
+<div class="topLink"><a href="index.html">トップに戻る</a></div>
+<!--本文 END-->
+</div>
+</div>
+<div class="foot" id="foot"><script type="text/javascript" src="js/foot.js"></script></div>
+</body>
+</html>

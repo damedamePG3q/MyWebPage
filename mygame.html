@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>自作Javascriptゲーム</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript">
+if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+	document.write('<link rel="stylesheet" type="text/css" href="css/style_sp.css">');
+}else{
+	document.write('<link rel="stylesheet" type="text/css" href="css/style_pc.css">');
+}
+</script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/pageInit.js"></script>
+<script type="text/javascript" src="js/lib.js"></script>
+</head>
+<body>
+<div class="head" id="head"><script type="text/javascript" src="js/head.js"></script></div>
+<div class="body" id="body">
+<div class="contents">
+<!--本文 START-->
+<h1>自作ゲーム</h1>
+<div class="spOnly">
+<script>
+var vcTextAd882323236Conf = {
+width: 300,
+textcolor: "#FFFFFF",
+bgcolor: "#333333",
+urlcolor: "#FF9900",
+opacity: 0.8,
+fontshadow: true
+}
+</script>
+<script language="javascript" src="http://ad.jp.ap.valuecommerce.com/servlet/smartphonebanner?sid=3097971&pid=882323236&position=inline"></script>
+</div>
+<div class="socialButton">
+<div id="fb-root"></div>
+<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" >ツイート</a>
+<span>
+<script type="text/javascript" src="//media.line.naver.jp/js/line-button.js?v=20131101" ></script>
+<script type="text/javascript">
+new jp.naver.line.media.LineButton({"pc":false,"lang":"ja","type":"a"});
+</script>
+</span>
+</div>
+<p>
+昔作ったJavasscriptによる、ヒマつぶしレベルの自作ゲームがおいてあります。<br>
+もともとInternetExproler6で動作すること、ゲームプログラムのサンプル作りを前提に考えており、<br>
+<b>グラフィック・デザインには気を使っておりません</b>キリﾂ。<br>
+また、ここにおいてあるスクリプトは、ライセンスフリーになっております。<br>
+(ゲーム性を表現するのにグラフィックは重要ではないということを証明したい)<br>
+※ PC用の為、スマフォでは基本的に動作しません。
+　&nbsp;一部のゲームは３ＤＳでも遊べます。(３ＤＳ版用意しました。)
+
+</p>
+<h2>タイピングゲーム</h2>
+<p class="lv2">
+	<img class="gameShot" src="img/mygame/typing1.jpg" ><br>
+	IE6で動作することを考えており、基本的にシンプルなレイアウトになっております。<br>
+	ミスタイプした場合、画面が赤くなりますので、音がでないブラウザ環境でも一応ゲームとして楽しめます。<br>
+	JavaScriptとAjaxの勉強を兼ねて、なんとなく作ってみた。<br>
+	<a href="#" class="gameLink pcOnly" onclick="javascript:window.open('game/typing/tpg.html',null,'width=800,height=600');">プレイする</a>
+	<span class="spOnly">遊びたかったら、パソコンからアクセスしてね。</span>
+</p>
+
+<h2>爆弾探し</h2>
+<p class="lv2">
+	<img class="gameShot" src="img/mygame/mine.jpg" ><br>
+	有名な爆弾探しのプログラムを再現してみた。<br>
+	(Chromeで動作可、FireFox非対応？、IE6動作可)　以前はFirefoxで動いたはずなのになぁ…<br>
+	<a href="#" class="gameLink pcOnly"  onclick="javascript:window.open('game/mine/main.html',null,'width=256,height=320');">ＰＣでプレイする</a><br>
+	<a href="https://dl.dropboxusercontent.com/u/130562870/3ds/mine/game.html" target="_blank">３ＤＳでプレイする</a><br>
+	<span class="spOnly">遊びたかったら、パソコンからアクセスしてね。</span>
+</p>
+
+<h2>ブロック落下</h2>
+<p class="lv2">
+	<img class="gameShot" src="img/mygame/block.jpg" ><br>
+	世界で一番有名な落ち物ゲーム<br>
+	プチコン版とほとんど同じロジックで作ってます。<br>
+	左上の"START"の文字をクリックするとゲーム開始<br>
+	十字キーで移動、スペースで回転<br>
+	IE6で快適動作させるために、必要最低限の色やデザインとなっております。<br>
+	ChromeとFireFoxで比べてみると、動作速度の違いから、以下にChromeが優秀なブラウザががわかります。(ChromeのJavaScript早すぎぃ)<br>	
+	3DSのJavascriptは非常に遅いため、ゲームになりませんでした。<br>
+	<a href="#" class="gameLink pcOnly"  onclick="javascript:window.open('game/block/main.html',null,'width=256,height=480');">ＰＣでプレイする</a><br>
+	<a href="https://dl.dropboxusercontent.com/u/130562870/3ds/block/game.html" target="_blank">３ＤＳでプレイする</a><br>
+	<span class="spOnly">遊びたかったら、パソコンからアクセスしてね。</span>
+</p>
+
+<h2>玉避けゲーム</h2>
+<p class="lv2">
+	<img class="gameShot" src="img/mygame/barange.jpg" ><br>
+	大量の弾幕を交わしつつ、アイテムを回収するゲーム。<br>
+	十字キーで移動、緑が自機、青いターゲットに触れると得点<br>
+	<a href="#" class="gameLink pcOnly" onclick="javascript:window.open('game/barrage/main.html',null,'width=340,height=280');">プレイする</a>
+	<span class="spOnly">遊びたかったら、パソコンからアクセスしてね。</span>
+</p>
+
+<!-- 広告表示 -->
+<script type="text/javascript" src="js/adType3.js"></script><br>
+
+
+<div class="topLink"><a href="index.html">トップに戻る</a></div>
+<!--本文 END-->
+</div>
+</div>
+<div class="menu" id="menu"><script type="text/javascript" src="js/menu.js"></script></div>
+
+<!-- 広告表示 -->
+<script type="text/javascript" src="js/adTypeH5.js"></script><br>
+
+<script type="text/javascript" src="js/lib.js"></script>
+<div class="foot" id="foot"><script type="text/javascript" src="js/foot.js"></script></div>
+</body>
+</html>

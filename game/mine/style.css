@@ -1,0 +1,74 @@
+TABLE TR TD{
+	cursor:default;
+}
+
+
+.MINE_N{
+	background-color:gray;
+}
+
+.MINE_V0{
+	
+}
+
+.MINE_V1{
+	color:green;
+}
+
+.MINE_V2{
+	color:blue;
+}
+
+.MINE_V3{
+	color:blue;
+}
+
+.MINE_V4{
+	color:brown;
+}
+
+.MINE_V5{
+	color:pink;
+}
+
+.MINE_V6{
+	color:violet;
+}
+
+.MINE_V7{
+	color:darkviolet;
+}
+
+.MINE_V8{
+	color:rad;
+}
+
+.MINE_BOM{
+	font-weight:bold;
+}
+
+.MINE_MISS{
+	font-weight:bold;
+	background-color:red;
+}
+
+
+.MINE_FLG{
+	background-color:gray;
+	color:white;
+	text-align:center;
+}
+
+.MINE_FLG_OK{
+	font-weight:bold;
+	background-color:skyblue;	
+}
+
+.MINE_FLG_NG{
+	font-weight:bold;
+	background-color:pink;
+}
+.MINE_FLG_Q{
+	font-weight:bold;
+	background-color:lightgreen;
+}

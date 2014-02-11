@@ -1,0 +1,108 @@
+﻿<html>
+<head>
+<title>努力と時間の無駄遣い～くだらないことほど本気になる～</title>
+<meta name="description" content="プチコンによる自作ゲームなどの個人サイト">
+<meta name="keywords" content="プチコン,QR,QRコード,ジャンプ,学習,初心者,物理計算,講座,ゲーム,作り方,PetitComputer,game,qrcode">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/pageCommonInc.js"></script>
+<script type="text/javascript" src="js/lib.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/pageInit.js"></script>
+</head>
+<body>
+<div class="head" id="head"><script type="text/javascript" src="js/head.js"></script></div>
+<div class="body" id="body">
+<div class="contents">
+<!--本文 START-->
+<h1>プチコン講座</h1><br>
+
+<h2>初心者の方へ</h2>
+<p>
+プチコンやプログラムに関して、全く知らない初心者の方は<br>公式サイトのプチコン初心者講座が一番丁寧でわかりやすいです。<br>
+<a href="http://smileboom.com/special/ptcm2/co_konnichiwa/p01.php" class="textLink" target="_blank">プチコンmkII 初心者講座</a><br>
+<br>
+また、ここではゲームプログラムを作成するにあたっての、<br>基礎的な知識を、<b class="fontPickup">極力難しいことを考えずに</b>伝えたいと考えております。
+</p>
+
+<div class="pageList lv2">
+<b>目次</b>
+<ol>
+<li><b>ジャンプの動作</b></li>
+<li><a href="petSta_2.html" class="textLink">サインとコサインの使い方</a></li>
+<li><a href="petSta_3.html" class="textLink">音楽(ＭＭＬ)の基本</a></li>
+</ol>
+</div>
+
+<h2>ジャンプの動作</h2>
+<div class="lv2">
+<p>
+ジャンプの動作は、<br>
+横方向に<span class="fontXBig fontPickup">等速直線運動</span>で<br>
+縦方向に<span class="fontXBig fontPickup">等加速運動</span>になってます。<br>
+<br>
+よって、下記のようなアルゴリズムで実現できます。<br>
+<br>
+要するに、難しい計算は考えずに、<span class="fontXBig fontImportant">足し算だけ</span>で実現できます。<br>
+</p>
+
+<div class="code">
+<ol class="codeList">
+<li><span class="comment">'変数</span></li>
+<li>ACC=0<span class="comment"> 　　　　　　　　　　　　　　'ジャンプの速度</span></li>
+<li>G=0.98<span class="comment">　　　　　　　　　　　　　　'重力加速度</span></li>
+<li>X=120<span class="comment"> 　　　　　　　　　　　　　　'プレイヤーのX座標</span></li>
+<li>Y=140<span class="comment"> 　　　　　　　　　　　　　　'プレイヤーのY座標</span></li>
+<li>ST=0<span class="comment">　　　　　　　　　　　　　　　'状態 0:歩行,1:ジャンプ</span></li>
+<li></li>
+<li><span class="label">@MAIN</span><span class="comment"> 　　　　　　　　　　　　　　'メインループ</span></li>
+<li>　<span class="keyword">IF</span> ST==1 <span class="keyword">THEN</span></li>
+<li>　　<span class="comment">'ジャンプ時の処理</span></li>
+<li>　　ACC=ACC-G<span class="comment"> 　　　　　　　　　　'重力に引かれて下方向に加速</span></li>
+<li>　　Y=Y-ACC<span class="comment"> 　　　　　　　　　　　'現在の高さから速度の分を加算</span></li>
+<li>　　<span class="keyword">IF</span> Y<140 <span class="keyword">THEN</span> ST=0<span class="comment">　　　　　　'床についたらジャンプ終了</span></li>
+<li>　<span class="keyword">END</span></li>
+<li>　<span class="keyword">IF</span> ボタンが押された <span class="keyword">THEN</span> ST=1<span class="comment"> 　'ボタンが押されたらジャンプ</span></li>
+<li><span class="keyword">GOTO</span> <span class="label">@MAIN</span></li>
+</ol>
+</div>
+<p>※ 実際のプチコンでは、IF文で複数行書けませんが、わかりやすく例えるとこんな感じになります。</p>
+
+
+<a href="#" onclick="window.open('qr_pop_up.html?p='+encodeURI('ジャンプのサンプルゲーム')+',sp_jp01,2',null,'width=640,height=480,location=no');return false;">QRコード</a>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<a href="#" onclick="window.open('img_pop_up.html?p='+encodeURI('ジャンプのサンプルゲーム')+',ptSta/jp_list.png,pgListImg',null,'width=640,height=480,location=no');return false;">プログラムリスト</a>
+
+</div>
+
+
+<div class="box">
+	<div class="adPict">
+		<a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?vs=3097971&vp=882323206&vg=6000296439&va=2599687&vc_url=http%3A%2F%2Fwww.7netshopping.jp%2Fbooks%2Fdetail%2F-%2Faccd%2F1102533328%2Fsubno%2F1" target="_blank" ><img src="http://img.7netshopping.jp/bks/images/i8/32010295.JPG" width="100" height="100" border="0"><img src="http://ad.jp.ap.valuecommerce.com/servlet/productlink?vs=3097971&vg=6000296439&va=2599687&vp=882323206" height="30" width="30" border="0"></a>
+	</div>
+	<div class="adDetail">
+		<a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?vs=3097971&vp=882323206&vg=6000296439&va=2599687&vc_url=http%3A%2F%2Fwww.7netshopping.jp%2Fbooks%2Fdetail%2F-%2Faccd%2F1102533328%2Fsubno%2F1" target="_blank" ><img src="http://ad.jp.ap.valuecommerce.com/servlet/productlink?vs=3097971&vg=6000296439&va=2599687&vp=882323206" height="1" width="1" border="0">よくわかる物理</a>
+	</div>
+	<p class="fontSmall">
+		高校で学習する物理の基本から、新たな宇宙物理学<br>
+		地球物理学などを解説する物理の入門書。
+		<br>
+	</p>
+</div>
+
+<!-- 広告表示 -->
+<script type="text/javascript" src="js/adType4.js"></script><br>
+
+<div class="nextPage"><a href="petSta_2.html">次のページ&nbsp;&nbsp;－角度計算の基本ー</a></div>
+<div class="topLink"><a href="index.html">トップに戻る</a></div>
+<!--本文 END-->
+</div>
+</div>
+<div class="menu" id="menu"><script type="text/javascript" src="js/menu.js"></script></div>
+
+<!-- 広告表示 -->
+<script type="text/javascript" src="js/adTypeH2.js"></script><br>
+
+<div class="foot" id="foot"><script type="text/javascript" src="js/foot.js"></script></div>
+</body>
+</html>

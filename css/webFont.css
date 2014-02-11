@@ -1,0 +1,7 @@
+﻿/* Web Font */
+@font-face {
+    font-family: smileBasic;																		/* フォントにフォント集合名を付ける */
+    src: url(https://dl.dropboxusercontent.com/u/130562870/Fonts/PETC/PETC.ttf) format('truetype');	/* フォントのURLを指定する */
+}
+.fontSmileBasicWeb{font-family:smileBasic;background-color:green;}
+

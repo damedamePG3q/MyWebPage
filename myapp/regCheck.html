@@ -1,0 +1,149 @@
+<html>
+<title>regchk</title>
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<script type="text/javascript">
+window.onload=init;
+var elmP;
+var elmR;
+var elmF;
+var elmT;
+function init(){
+	var d=document;
+	elmP=d.getElementById("p");
+	elmR=d.getElementById("r");
+	elmF=d.getElementById("f");
+	elmT=d.getElementById("t");
+	elmP.onchange=test;
+	elmR.onchange=test;
+	elmP.onkeyup=test;
+	elmR.onkeyup=test;
+}
+function test(){
+	var f;
+	var m;
+	var c;
+	f=regCheck(elmP.value,elmR.value,elmT.value);
+	if(f==0){
+		m="マッチします。";
+		c="n";
+	}else if(f==1){
+		m="マッチしません。";
+		c="e";
+	}else{
+		m="正規表現構文に誤りがあります！";
+		c="e";
+	}
+	elmF.className=c;
+	elmF.innerHTML=m;
+}
+function regCheck(v,r,f){
+	var re;
+	var t="";
+	if(f=="0"){t="i";}
+	try{
+		re=new RegExp(r,t);
+		if(v.match(re)){
+			return 0;
+		}else{
+			return 1;
+		}
+	}catch(e){
+		return -1;
+	}
+}
+</script>
+<style type="text/css">
+*{font-size:16pt;}
+.n{color:blue;}
+.e{color:red;}
+.ref tr td{font-size:10pt;}
+#p,#r{width:90%;}
+
+span.sub{color:green;}
+
+div.table{display:table;}
+div.row{display:table-row;}
+div.cell,
+div.cellH{
+	width:30%;
+	display:table-cell;
+	border-style:solid;
+	border-width:1px;
+	padding:2px;
+}
+div.cellH{font-weight:bold;font-size:0.9em;}
+div.cell{font-size:0.9px;}
+
+div.refTable{
+	width:90%;
+	border-style:solid;
+	border-width:1px;
+	padding:2px;
+}
+
+</style>
+</head>
+
+
+
+<body>
+<noscript>
+javascriptが必要です。
+</noscript>
+
+<h1><a name="pageTop">正規表現チェッカー</a></h1>
+<b>テキスト：</b><input type="text" id="p"/><br />
+<b>正規表現：</b><input type="text" id="r" /><br />
+<b>大文字/小文字：</b>
+<select id="t">
+<option value="0">区別しない</option><option value="1">区別する</option>
+</select><br />
+<b>結果：</b>　<span id="f"></span><br />
+<br/><br/>
+
+<h2>正規表現リファレンス</h2>
+
+
+<div class="table refTable">
+<div class="row"><div class="cellH">A</div><div class="cell">Aという文字</div></div>
+<div class="row"><div class="cellH">ABC</div><div class="cell">ABCという文字列</div></div>
+<div class="row"><div class="cellH">[ABC]</div><div class="cell">A,B.Cのいずれか1文字</div></div>
+<div class="row"><div class="cellH">[A-C]</div><div class="cell">A～Cまでのいずれか1文字</div></div>
+<div class="row"><div class="cellH">[^ABC]</div><div class="cell">A,B,Cのいずれでもない任意の1文字</div></div>
+<div class="row"><div class="cellH">.</div><div class="cell">任意の1文字</div></div>
+<div class="row"><div class="cellH">A+</div><div class="cell">1文字以上のA</div></div>
+<div class="row"><div class="cellH">A*</div><div class="cell">0文字以上のA</div></div>
+<div class="row"><div class="cellH">A?</div><div class="cell">0文字または1文字のA</div></div>
+<div class="row"><div class="cellH">^ABC</div><div class="cell">ABCで始まる文字列</div></div>
+<div class="row"><div class="cellH">ABC$</div><div class="cell">ABCで終わる文字列</div></div>
+<div class="row"><div class="cellH">ABC|DEF|GHI</div><div class="cell">ABCまたはDEFまたはGHI</div></div>
+<div class="row"><div class="cellH">\+や\*</div><div class="cell">+や*</div></div>
+<div class="row"><div class="cellH">A{2}</div><div class="cell">2個のA(AA)</div></div>
+<div class="row"><div class="cellH">A{2,}</div><div class="cell">2個以上のA(AA,AAA,AAAA,...)</div></div>
+<div class="row"><div class="cellH">A{2,3}</div><div class="cell">2個～3個のA(AA,AAA)</div></div>
+<div class="row"><div class="cellH">[\b]</div><div class="cell">バックスペース</div></div>
+<div class="row"><div class="cellH">\b</div><div class="cell">スペースなどの単語の区切り</div></div>
+<div class="row"><div class="cellH">\B</div><div class="cell">\b以外の文字</div></div>
+<div class="row"><div class="cellH">\cA</div><div class="cell">Ctrl-A</div></div>
+<div class="row"><div class="cellH">\d</div><div class="cell">任意の数値([0-9]と同じ)</div></div>
+<div class="row"><div class="cellH">\D</div><div class="cell">数値以外の文字([^0-9]と同じ)</div></div>
+<div class="row"><div class="cellH">\f</div><div class="cell">フォームフィード文字</div></div>
+<div class="row"><div class="cellH">\n</div><div class="cell">改行文字</div></div>
+<div class="row"><div class="cellH">\r</div><div class="cell">復帰文字</div></div>
+<div class="row"><div class="cellH">\s</div><div class="cell">1文字の区切り文字([\f\n\r\t\v])</div></div>
+<div class="row"><div class="cellH">\S</div><div class="cell">\s以外の1文字</div></div>
+<div class="row"><div class="cellH">\t</div><div class="cell">タブ文字</div></div>
+<div class="row"><div class="cellH">\v</div><div class="cell">垂直タブ文字</div></div>
+<div class="row"><div class="cellH">\w</div><div class="cell">英数文字([A-Za-z0-9_]と同じ)</div></div>
+<div class="row"><div class="cellH">\W</div><div class="cell">\w以外の文字</div></div>
+<div class="row"><div class="cellH">\2</div><div class="cell">2番目の(...)にマッチした文字列</div></div>
+<div class="row"><div class="cellH">\o033</div><div class="cell">8進数で033の文字</div></div>
+<div class="row"><div class="cellH">\x1b</div><div class="cell">16進数で1bの文字</div></div>
+</div>
+
+<a href="#pageTop">先頭に戻る</a>
+
+</body>
+</htm>

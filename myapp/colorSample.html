@@ -1,0 +1,181 @@
+<HTML>
+<HEAD><TITLE>色見本</TITLE>
+<SCRIPT type="text/javascript">
+	window.onload=init;
+	var nowColor = "#ff0000;";
+	var nowTextColor ="#000000";
+	
+	function init(){
+		document.getElementById("colorCheck").onclick=function(){check()};
+		document.getElementById("colorText").onchange=function(){check()};
+		colorChart();
+		check();
+	}
+	
+	function getRadioValue(name){
+		var d=document;
+		var list=d.getElementsByName(name);
+		var l=list.length;
+		var elm;
+		var i;
+		for(i=0;i<l;i++){
+			elm=list[i];
+			if(elm.checked){
+				return elm.value;
+			}
+		}
+	}
+	
+	function check(){
+		var d=document;
+		var text;
+		var type;
+		
+		text=d.getElementById("colorText").value;	 
+		type=getRadioValue("sel");
+
+		try{
+			if(type=="0"){
+				d.getElementById("colorDisp").style.backgroundColor=text;
+				nowColor=text;
+			}else{
+				d.getElementById("colorDisp").style.color=text;
+				nowTextColor=text;
+			}
+			d.getElementById("info").innerHTML="&nbsp;(背景："+ nowColor +"，文字："+ nowTextColor +")";
+			
+		}catch(e){
+			d.getElementById("colorDisp").style.backgroundColor="#FFF";
+			//alert("Error：定義されていないパラメータです");
+		}
+	}
+
+	function colorChart(){
+		var body;
+		var mainElm;
+		var s="";
+		var list=new Array("ff","cc","99","66","33","00");
+		var list2=new Array("ff","ee","dd","cc","bb","aa","99","88","77","66","55","44","33","22","11","00");
+		var l=list.length;
+		var color;
+		var textColor;
+		var i,j,k;
+
+		var d=document;
+		body=d.getElementsByTagName("BODY")[0];
+		mainElm=d.createElement("DIV");
+
+		s+="<h3>セーフカラー216色</h3>";
+		
+		for(i=0;i<l;i++){
+			for(j=0;j<l;j++){
+				for(k=0;k<l;k++){
+					color=list[i]+list[j]+list[k];
+					if(i>2 && j>2){
+						textColor="#fff";	
+					}else{
+						textColor="#000";
+					}
+					s+="<div class='colorBox' style='background-color:#"+ color +";color:"+ textColor +"' onclick=\"setColor('#"+ color +"');\">#"+ color +"</div>";
+				}
+				s+="<BR />"
+			}
+		}
+		
+		s+="<h3>モノトーン16色</h3>";
+
+		l=list2.length;
+		for(i=0;i<l;i++){
+			color=list2[i]+list2[i]+list2[i];
+			if(i>7){
+				textColor="#fff";	
+			}else{
+				textColor="#000";
+			}
+			s+="<div class='colorBox2' style='background-color:#"+ color +";color:"+ textColor +"' onclick=\"setColor('#"+ color +"');\">#"+ color +"</div>";
+			if(i!=0&&i%4==3){
+				s+="<BR />"
+			}
+		}
+		
+		s+="</NOBR>";
+		
+		mainElm.innerHTML=s;
+		body.appendChild(mainElm);
+	}
+
+	function setColor(value){
+		document.getElementById("colorText").value=value;
+		check();
+		location.href="#pageTop";
+	}
+
+</SCRIPT>
+<STYLE type="text/css">
+	#colorDisp{
+		padding:10px;
+		width:200px;
+		height:20px;
+		background-color:#f00;
+		border-style:solid;
+		border-width: 2px;
+		border-color:#000;
+		
+	}
+	
+	div.colorInfo{
+		width:200px;
+		padding:5px;
+	}
+	
+	
+	div.colorBox,
+	div.colorBox2{
+		padding:2px;
+		border-style:solid;
+		border-width:1px;
+		border-color:black;
+		font-size:0.7em;
+		float:left;
+	
+	}
+	
+	div.colorBox{
+		width:13%;
+	}
+	
+	div.colorBox2{
+		width:20%;
+	}
+	
+	h3{
+		padding-top:10px;
+		clear:both;
+	}	
+	
+	.comment{color:green;}
+	
+</STYLE>
+</HEAD>
+<BODY>
+<h1>
+<a name="pageTop">色表示サンプル</a>
+</h1>
+<NOBR>
+<div id="colorDisp">sample</div>
+<div id="info" class="colorInfo"></div>
+
+<b>色を指定：
+<INPUT id="colorText" type="text" value="#f00"><BR />
+<INPUT id="rd1" name="sel" type="radio" value="0" checked="checked">：背景<BR />
+<INPUT id="rd2" name="sel" type="radio" value="1">：文字
+</b>
+<INPUT id="colorCheck" type="button" value="表示">
+<p class="comment">
+※ #nnn 又は #nnnnnn 形式で指定する <br />
+&nbsp;&nbsp;&nbsp;下記一覧より、クリックする
+</p>
+<h2>--- WEBカラー一覧 ---</h2>
+
+</BODY>
+</HTML>
